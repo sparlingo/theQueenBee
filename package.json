@@ -1,10 +1,10 @@
 {
-  "name": "keystone-6-railway-example",
-  "version": "1.0.0",
-  "description": "A simple example project showing how you might deploy Keystone 6 to Railway",
+  "name": "theQueenBee",
+  "version": "0.1.0",
+  "description": "Run an Ultimate Frisbee League",
   "main": "keystone.ts",
   "repository": "git@github.com:keystonejs/keystone-6-railway-example.git",
-  "author": "John Molomby <john@thinkmill.com.au>",
+  "author": "Kevin Sparling <kevinsparling@gmail.com>",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -16,8 +16,9 @@
     "build": "keystone build && keystone prisma migrate deploy"
   },
   "dependencies": {
-    "@keystone-6/auth": "^1.0.0",
-    "@keystone-6/core": "^1.0.0"
+    "@keystone-6/auth": "^1.0.1",
+    "@keystone-6/core": "^1.0.1",
+    "@keystone-6/fields-document": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^4.5.2"

@@ -12,7 +12,7 @@ import { PORT, DATABASE_URL, SESSION_MAX_AGE, SESSION_SECRET } from './config';
 // management and access control are controlled independently in the main keystone config.
 const { withAuth } = createAuth({
   // This is the list that contains items people can sign in as
-  listKey: 'Person',
+  listKey: 'User',
   // The identity field is typically a username or email address
   identityField: 'email',
   // The secret field must be a password type field
@@ -44,6 +44,10 @@ export default withAuth(
       url: DATABASE_URL,
     },
     server: { port: PORT },
+    ui: {
+      // For our starter, we check that someone has session data before letting them see the Admin UI.
+      isAccessAllowed: (context) => !!context.session?.data,
+    },
     lists,
     // We add our session configuration to the system here.
     session,

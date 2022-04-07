@@ -11,22 +11,36 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model Task {
-  id           String    @id @default(cuid())
-  label        String    @default("")
-  priority     String?
-  isComplete   Boolean   @default(false)
-  assignedTo   Person?   @relation("Task_assignedTo", fields: [assignedToId], references: [id])
-  assignedToId String?   @map("assignedTo")
-  finishBy     DateTime?
-
-  @@index([assignedToId])
+model User {
+  id       String @id @default(cuid())
+  name     String @default("")
+  email    String @unique @default("")
+  password String
+  posts    Post[] @relation("Post_author")
 }
 
-model Person {
-  id       String  @id @default(cuid())
-  name     String  @default("")
-  email    String  @unique @default("")
-  password String?
-  tasks    Task[]  @relation("Task_assignedTo")
+model Post {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  status      String?   @default("draft")
+  content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  publishDate DateTime?
+  author      User?     @relation("Post_author", fields: [authorId], references: [id])
+  authorId    String?   @map("author")
+  tags        Tag[]     @relation("Post_tags")
+
+  @@index([authorId])
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @default("")
+  posts Post[] @relation("Post_tags")
+}
+
+model Organization {
+  id      String @id @default(cuid())
+  name    String @default("")
+  city    String @default("")
+  country String @default("")
 }
