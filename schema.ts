@@ -12,8 +12,6 @@ import { Lists } from '.keystone/types'
 
 export const lists: Lists = {
   User: list({
-    // Here are the fields that `User` will have. We want an email and password so they can log in
-    // a name so we can refer to them, and a way to connect users to posts.
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({
@@ -21,7 +19,6 @@ export const lists: Lists = {
         isIndexed: 'unique',
         isFilterable: true,
       }),
-      // The password field takes care of hiding details and hashing values
       password: password({ validation: { isRequired: true } }),
       // Relationships allow us to reference other lists. In this case,
       // we want a user to have many posts, and we are saying that the user
@@ -98,7 +95,6 @@ export const lists: Lists = {
       }),
     },
   }),
-  // Our final list is the tag list. This field is just a name and a relationship to posts
   Tag: list({
     ui: {
       isHidden: true,
